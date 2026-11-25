@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小狄氧舱自媒体平台运营智能体 · 使用教程</title>
+<style>
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;padding:40px 22px 64px;background:#fff;color:#1b1b1b;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+    font-size:16px;line-height:1.85;
+  }
+  .wrap{max-width:780px;margin:0 auto}
+
+  /* 封面区 */
+  .cover{padding-bottom:26px;margin-bottom:8px;border-bottom:2px solid #1b1b1b}
+  .kicker{font-size:12px;letter-spacing:.16em;color:#a9791f;margin:0 0 12px;text-transform:uppercase}
+  h1{font-size:30px;line-height:1.32;margin:0 0 14px;font-weight:680;letter-spacing:-.015em}
+  .sub{font-size:15.5px;color:#6d6a64;margin:0 0 18px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{font-size:12.5px;color:#4a4640;background:#fbf8f2;border:1px solid #e7e0d3;
+        border-radius:999px;padding:3px 11px;font-family:ui-monospace,Consolas,monospace}
+
+  /* 三栏速览 */
+  .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px 0 6px}
+  .q{background:#fbf8f2;border:1px solid #e7e0d3;border-radius:10px;padding:14px 15px}
+  .q b{display:block;font-size:13px;color:#a9791f;letter-spacing:.06em;
+       font-family:ui-monospace,Consolas,monospace;margin-bottom:5px}
+  .q p{margin:0;font-size:14.5px;line-height:1.7;color:#3d3a34}
+
+  /* 章节 */
+  h2{font-size:13px;letter-spacing:.14em;color:#8a8478;font-weight:600;
+     margin:44px 0 14px;padding-bottom:9px;border-bottom:1px solid #e7e0d3}
+  h2 .n{color:#a9791f;margin-right:10px;font-family:ui-monospace,Consolas,monospace}
+  h3{font-size:17px;margin:26px 0 8px;font-weight:640}
+  p{margin:0 0 13px}
+  ul,ol{margin:0 0 14px;padding-left:22px}
+  li{margin-bottom:7px}
+  strong{font-weight:640}
+  code{font-family:ui-monospace,Consolas,"Courier New",monospace;font-size:14px;
+       background:#f6f2e9;border:1px solid #ece5d8;border-radius:4px;padding:1px 6px}
+
+  /* 命令块 */
+  .cmd{background:#1f1d1a;color:#f6f2e9;border-radius:9px;padding:15px 17px;
+       font-family:ui-monospace,Consolas,"Courier New",monospace;
+       font-size:13.5px;line-height:1.9;margin:0 0 16px;
+       white-space:pre-wrap;overflow-wrap:anywhere}
+  .cmd .g{color:#c9a35c}
+  .cmd .c{color:#8d877c}
+
+  /* 提示与警示 */
+  .tip,.warn{border-radius:0 8px 8px 0;padding:13px 16px;margin:0 0 16px;font-size:14.5px;line-height:1.75}
+  .tip{background:#fbf8f2;border-left:3px solid #a9791f;color:#3d3a34}
+  .warn{background:#fdf7f2;border-left:3px solid #b4552d;color:#4a3a30}
+  .tip b,.warn b{display:block;font-size:12.5px;letter-spacing:.08em;margin-bottom:4px}
+  .tip b{color:#8a5f12}
+  .warn b{color:#b4552d}
+
+  /* 表格 */
+  .tw{overflow-x:auto;margin:0 0 18px}
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #ece5d8;vertical-align:top}
+  th{font-size:12px;letter-spacing:.08em;color:#8a8478;font-weight:600;white-space:nowrap;
+     border-bottom:1px solid #d8d0bf}
+  td:first-child{white-space:nowrap;color:#8a5f12;font-family:ui-monospace,Consolas,monospace;font-size:13.5px}
+
+  /* 步骤 */
+  .steps{list-style:none;margin:0 0 18px;padding:0;counter-reset:st}
+  .steps li{counter-increment:st;position:relative;padding-left:42px;margin-bottom:17px}
+  .steps li::before{content:counter(st,decimal-leading-zero);position:absolute;left:0;top:1px;
+    color:#a9791f;font-family:ui-monospace,Consolas,monospace;
+    font-size:14px;font-weight:600;letter-spacing:.02em}
+  .steps li b{display:block;margin-bottom:2px;font-weight:640}
+
+  /* 输出样张 */
+  .spec{border:1px solid #e7e0d3;border-radius:10px;overflow:hidden;margin:0 0 18px}
+  .spec .bar{background:#fbf8f2;border-bottom:1px solid #e7e0d3;padding:9px 14px;
+    font-size:12.5px;color:#8a8478;font-family:ui-monospace,Consolas,monospace}
+  .spec .body{padding:16px}
+  .spec .h{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+  .spec .h .num{color:#a9791f;font-family:ui-monospace,Consolas,monospace;font-size:20px;font-weight:600}
+  .spec .h b{font-size:15.5px}
+  .spec .h .t{font-size:11px;color:#6d6a64;border:1px solid #e7e0d3;border-radius:4px;padding:0 6px}
+  .spec .gl{font-size:12.5px;color:#8a8478;margin:0 0 12px;padding-left:30px}
+  .spec .vo{background:#fff;border:1px solid #ece5d8;border-radius:7px;padding:11px 13px}
+  .spec .vo em{display:block;font-style:normal;font-size:11.5px;color:#8a8478;
+    font-family:ui-monospace,Consolas,monospace;margin-bottom:6px}
+  .spec .vo p{font-size:14px;line-height:1.8;margin:0 0 8px;color:#1b1b1b}
+  .spec .vo p:last-child{margin-bottom:0}
+  .spec .ft{display:flex;gap:14px;font-size:12px;color:#8a8478;margin-top:12px;
+    padding-top:9px;border-top:1px solid #ece5d8}
+
+  /* 页脚 */
+  .end{margin:46px 0 0;padding-top:16px;border-top:1px solid #e7e0d3;
+       font-size:12.5px;color:#8a8478;line-height:1.8}
+
+  @media (max-width:640px){
+    body{padding:26px 15px 48px;font-size:15.5px}
+    h1{font-size:23px}
+    .quick{grid-template-columns:1fr}
+    .steps li{padding-left:34px}
+  }
+
+  @page{size:A4;margin:13mm 12mm}
+  @media print{
+    body{padding:0;font-size:10pt;line-height:1.7}
+    .wrap{max-width:none}
+    h1{font-size:19pt}
+    h2{font-size:9.5pt;margin:7mm 0 3mm;break-after:avoid}
+    h3{font-size:12pt;margin:4mm 0 2mm;break-after:avoid}
+    p{margin-bottom:2.5mm}
+    .quick{gap:3mm;margin:5mm 0 2mm}
+    .q{padding:3mm}
+    .q p{font-size:9pt}
+    .cmd{font-size:9pt;padding:3mm;break-inside:avoid}
+    .tip,.warn{font-size:9pt;padding:2.5mm 3mm;break-inside:avoid}
+    .spec{break-inside:avoid}
+    .steps li{break-inside:avoid;margin-bottom:3mm}
+    table{font-size:9pt}
+    th,td{padding:1.5mm 2mm}
+    .end{margin-top:6mm;font-size:8.5pt}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="cover">
+    <p class="kicker">Dealer Handbook · 经销商手册</p>
+    <h1>小狄氧舱自媒体平台运营智能体</h1>
+    <p class="sub">你把城市、型号和需求说清楚，它把这一周能拍的十条脚本排好版，装进一个文件里给你。</p>
+    <div class="meta">
+      <span class="pill">版本 4.0</span>
+      <span class="pill">2026-11</span>
+      <span class="pill">适用：视频号 / 抖音 / 小红书</span>
+    </div>
+  </div>
+
+  <div class="quick">
+    <div class="q"><b>输入</b><p>城市 ＋ 氧舱型号 ＋ 需求，一句话</p></div>
+    <div class="q"><b>输出</b><p>一个 HTML 文件，十条脚本，手机可看可打印</p></div>
+    <div class="q"><b>你只需</b><p>照着念，照着拍，不用自己想选题</p></div>
+  </div>
+
+  <h2><span class="n">01</span>它是什么</h2>
+
+  <p>这是一个装在 WorkBuddy 里的运营助手，专门给小狄氧舱的经销商用。它做三件事：</p>
+  <ul>
+    <li><strong>找选题</strong>——抓本周全国和同城的康养类热点，挑出能跟氧舱搭上话的那几条。</li>
+    <li><strong>写脚本</strong>——按你店里的型号，出十条二十秒能拍完的口播稿，带镜头清单。</li>
+    <li><strong>排好版</strong>——把十条稿子做成一个能直接打开、能打印的 HTML 文件。</li>
+  </ul>
+
+  <div class="tip">
+    <b>它不做什么</b>
+    不替你发视频，不承诺播放量，不说产品能治病。凡是要靠效果承诺才能卖出去的话，它不会写——写了你也不敢发。
+  </div>
+
+  <h2><span class="n">02</span>怎么用：一句话开始</h2>
+
+  <p>打开 WorkBuddy，输入 <code>@</code> 选中「小狄氧舱自媒体平台运营智能体」，然后按这个顺序说三件事：</p>
+
+  <div class="cmd"><span class="c"># 最常用的一句式</span>
+@小狄氧舱自媒体平台运营智能体 <span class="g">杭州</span> <span class="g">GYCHA-M001</span> 本周同城和全国康养热点，出 10 个能拍的
+
+<span class="c"># 换个说法也行，它认得出来</span>
+@小狄氧舱自媒体平台运营智能体 我是<span class="g">成都</span>的店，装的<span class="g">四人舱</span>，这周出几条视频</div>
+
+  <div class="tw">
+    <table>
+      <tr><th>要说的</th><th>为什么必须给</th><th>没说会怎样</th></tr>
+      <tr><td>城市</td><td>同城热点是这类账号最好用的流量来源</td><td>它会问一次；还不说就只用全国热点</td></tr>
+      <tr><td>型号</td><td>单人舱讲私密，四人舱讲翻台，讲错等于自曝不懂行</td><td>默认按双人舱 GYCHA-M001 处理，并在文件里标注</td></tr>
+      <tr><td>需求</td><td>是要十条、要一条完整版，还是只要热点</td><td>默认「本周热点 ＋ 10 条可拍脚本」</td></tr>
+    </table>
+  </div>
+
+  <div class="warn">
+    <b>一个常见误解</b>
+    第一条不用写得漂亮。城市写对、型号写对，剩下的它自己会补。写一大段背景反而拖慢速度。
+  </div>
+
+  <h2><span class="n">03</span>你会拿到什么</h2>
+
+  <p>不是一段聊天记录，是<strong>一个 HTML 文件</strong>。文件名长这样：</p>
+  <p><code>小狄氧舱-杭州-GYCHA-M001-20261125.html</code></p>
+
+  <p>双击就能用浏览器打开。里面第一个区块是本周热点，然后十条脚本一条一张卡，长这样：</p>
+
+  <div class="spec">
+    <div class="bar">小狄氧舱-杭州-GYCHA-M001-20261125.html</div>
+    <div class="body">
+      <div class="h"><span class="num">02</span><b>我劝你先别急着买舱</b><span class="t">避坑</span></div>
+      <p class="gl">挂点：全国「健身房闭店」讨论 → 设备不是救命稻草，客源结构才是</p>
+      <div class="vo">
+        <em>22 秒 · 101 字 · 3 段　　　　　　　　　　　　　　[ 复制口播 ]</em>
+        <p>有人加我第一句就问多少钱。我一般先劝一句：别急。</p>
+        <p>不是不想卖。是没有客源结构，这台机器买回去就是负债。</p>
+        <p>先把「谁会来、多久来一次」想清楚，再谈型号和价格。</p>
+      </div>
+      <div class="ft"><span>拍摄 12 分钟</span><span>难度 ★</span><span>口播 22 秒</span></div>
+    </div>
+  </div>
+
+  <p>每张卡固定六项：编号、标题、热点挂点、口播全文（标好秒数和字数）、三个镜头、拍摄耗时与 CTA。</p>
+  <p><strong>口播区右上角有个「复制口播」按钮</strong>——点一下，三段文字整段复制，直接粘到提词器或剪映里。不用手选，手选一定会漏字。</p>
+
+  <h2><span class="n">04</span>拿到文件以后怎么用</h2>
+
+  <ol class="steps">
+    <li><b>手机上打开</b>把文件发到微信「文件传输助手」，在手机上点开，用浏览器打开。排版会自动变成单列，字号够大，站在舱边上也看得清。</li>
+    <li><b>挑三条先拍</b>不要十条一起拍。文件最后一行写了「先拍哪三条」，那是同一个机位一次能录完的组合，四十分钟搞定。</li>
+    <li><b>复制口播对着念</b>点「复制口播」，粘进提词器。念的时候别背，按自己说话的习惯断句，只要字数别加。</li>
+    <li><b>打印带走</b>右上角「打印 / 存 PDF」，A4 一页两张卡，正好剪开一人一张。</li>
+  </ol>
+
+  <h2><span class="n">05</span>想改，就再说一句话</h2>
+
+  <div class="tw">
+    <table>
+      <tr><th>你这样说</th><th>它做什么</th></tr>
+      <tr><td>展开第 3 条</td><td>把第 3 条扩成完整分镜版：分镜表、大字卡、拍摄清单、发布包、合规自检</td></tr>
+      <tr><td>换一批</td><td>保持类型配比，换角度重出十条，钩子不重复</td></tr>
+      <tr><td>这条太平了</td><td>只改标题和前 3 秒，其余不动</td></tr>
+      <tr><td>拍不了</td><td>说清缺哪几个镜头，给一个不需要人出镜的替代版</td></tr>
+      <tr><td>这句话能说吗</td><td>出对照表：原句 → 问题在哪 → 改成什么</td></tr>
+      <tr><td>上周播放 300，完播 9%</td><td>一句话诊断 ＋ 三条动作 ＋ 下一条该拍哪条</td></tr>
+    </table>
+  </div>
+
+  <p>同一家店它会记住。第二次来只要说「还是杭州双人舱，下周的」，型号和之前的选题它都还留着，不会重复给你同一个角度。</p>
+
+  <h2><span class="n">06</span>五种会被退回来的稿子</h2>
+
+  <p>下面这几条它不是建议，是硬规则。写的时候就已经避开了，你如果需要改，也请守住：</p>
+
+  <div class="tw">
+    <table>
+      <tr><th>情况</th><th>说明</th></tr>
+      <tr><td>说治病</td><td>治疗、治愈、有效率、根治、替代医疗、逆龄，一个都不能出现。它不是医疗器械。</td></tr>
+      <tr><td>承诺收益</td><td>「几个月回本」「一年赚多少」一律不写。只谈成本结构和谁赚哪一段。</td></tr>
+      <tr><td>蹭灾难</td><td>事故、灾害、明星、地域对立，再热也不挂。你是实名露脸的本地生意。</td></tr>
+      <tr><td>超时</td><td>标 22 秒却写了 130 字，拍出来一定超。字数按 4.7 字/秒算，写完要数字数。</td></tr>
+      <tr><td>拍不了</td><td>要客户出镜但没客户授权、要飞机航拍、要专业灯光——写之前就该被替换掉。</td></tr>
+    </table>
+  </div>
+
+  <div class="warn">
+    <b>关于数字</b>
+    从业年限说「二十年」、参与标准说「66 项（截至 2025 年 6 月）」、公司经历说「2024 年起负责健康科技板块」。这三项已经统一，不要换成别的说法，同一个号发出去会被截图对比。
+  </div>
+
+  <h2><span class="n">07</span>常见问题</h2>
+
+  <h3>文件打不开 / 打开是一堆代码</h3>
+  <p>说明存成了 <code>.txt</code>。改后缀为 <code>.html</code> 就行。如果是微信里直接预览，点右上角「用其他应用打开」选浏览器。</p>
+
+  <h3>它说没取到实时热点</h3>
+  <p>文件顶栏会写清楚用的是哪一层数据：实时检索、本周快照、还是季节常青。看到「快照」或「季节」就说明当天没取到实时热点，标题里不要写「刚刚」「今天」。这不是故障，是它在如实告诉你数据从哪来。</p>
+
+  <h3>十条里我只想拍一条</h3>
+  <p>正常。一周围绕一条精品比十条糊弄强。说「展开第 5 条」，拿完整分镜版去拍。</p>
+
+  <h3>能不能直接帮我发出去</h3>
+  <p>不能。它只做到「稿子能拍」这一步。发布要你自己来，因为账号是你的，评论也是你的。</p>
+
+  <h3>换了型号怎么办</h3>
+  <p>直接说「我加了台四人舱」。它会换一套角度：四人舱讲翻台、讲坪效、讲场地改造，跟双人舱完全是两种讲法。</p>
+
+  <h2><span class="n">08</span>三句话，抄走就能用</h2>
+
+  <p>不确定怎么说的时候，直接复制改两个字：</p>
+
+  <div class="cmd"><span class="c"># ① 每周常规出稿</span>
+@小狄氧舱自媒体平台运营智能体 <span class="g">城市</span> <span class="g">型号</span> 本周同城和全国康养热点，出 10 个能拍的
+
+<span class="c"># ② 只想拍一条精品</span>
+@小狄氧舱自媒体平台运营智能体 <span class="g">城市</span> <span class="g">型号</span> 给一条这周最适合我店里拍的，直接出完整分镜版
+
+<span class="c"># ③ 有素材，让它照着素材写</span>
+@小狄氧舱自媒体平台运营智能体 <span class="g">城市</span> <span class="g">型号</span>
+我手上有舱体开门、控制屏、前台登记本、客人离店背影，按这些能拍到的出 10 条</div>
+
+  <div class="tip">
+    <b>第三种最好用</b>
+    先告诉它你能拍到什么，它就不会写一堆你拍不出来的镜头。素材决定选题，不是选题决定素材——这条反了，稿子就白写。
+  </div>
+
+  <h2><span class="n">09</span>本周开工清单</h2>
+
+  <ul>
+    <li><strong>□ 拿到文件</strong>　确认顶栏的城市、型号、日期对得上。日期不对说明用的是旧文件。</li>
+    <li><strong>□ 看热点层级</strong>　写「实时检索」可以提「这周」；写「快照」「季节」就别提时间。</li>
+    <li><strong>□ 挑三条</strong>　按文件末尾的拍摄顺序挑，同一个机位一次录完。</li>
+    <li><strong>□ 念一遍</strong>　掐表念，超时就删字，别加语速。人一紧张只会更慢。</li>
+    <li><strong>□ 拍完当天发</strong>　隔天发，热点就凉了。同城流量吃的是速度。</li>
+    <li><strong>□ 记三个数</strong>　播放、完播率、平均播放时长。下周把这三个数丢给它，它告诉你下一条该拍什么。</li>
+  </ul>
+
+  <div class="end">
+    <p><b>小狄氧舱自媒体平台运营智能体 · 使用教程</b>　版本 4.0｜2026 年 11 月</p>
+    <p>本文件由 HTML 打印生成。源文件 <code>docs/使用教程.html</code>，随仓库一起分发，可自行修改后重新打印。</p>
+  </div>
+
+</div>
+</body>
+</html>

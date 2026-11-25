@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小狄氧舱 · 杭州 · GYCHA-M001 · 2026-11-25</title>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小狄氧舱 · {{城市}} · {{型号}} · {{YYYY-MM-DD}}</title>
+<style>
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;padding:28px 20px 56px;background:#fff;color:#1b1b1b;
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+    font-size:16px;line-height:1.8;
+  }
+  .wrap{max-width:760px;margin:0 auto}
+
+  /* 顶栏 */
+  .kicker{font-size:12px;letter-spacing:.14em;color:#a9791f;text-transform:uppercase;margin:0 0 10px}
+  h1{font-size:26px;line-height:1.35;margin:0 0 14px;font-weight:650;letter-spacing:-.01em}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+  .pill{font-size:12.5px;color:#4a4640;background:#fbf8f2;border:1px solid #e7e0d3;
+        border-radius:999px;padding:3px 11px;font-family:ui-monospace,Consolas,monospace}
+  .pill.hot{color:#8a5f12;border-color:#e3cf9e;background:#fdf6e6}
+  .lede{font-size:14.5px;color:#6d6a64;margin:0 0 22px;padding-left:12px;border-left:2px solid #e7e0d3}
+
+  /* 区块标题 */
+  h2{font-size:14px;letter-spacing:.1em;color:#8a8478;font-weight:600;
+     margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid #e7e0d3}
+
+  /* 热点区 */
+  .hots{list-style:none;margin:0;padding:0}
+  .hots li{position:relative;padding:9px 0 9px 26px;font-size:15px;border-bottom:1px dashed #f0eade}
+  .hots li:last-child{border-bottom:0}
+  .hots li::before{content:attr(data-i);position:absolute;left:0;top:10px;
+    font-family:ui-monospace,Consolas,monospace;font-size:12px;color:#a9791f}
+  .hots .src{display:block;font-size:12.5px;color:#8a8478;margin-top:2px}
+
+  /* 脚本卡 */
+  .card{background:#fbf8f2;border:1px solid #e7e0d3;border-radius:10px;
+        padding:20px 20px 16px;margin:0 0 18px}
+  .head{display:flex;align-items:baseline;gap:12px;margin:0 0 6px}
+  .num{font-family:ui-monospace,Consolas,monospace;font-size:24px;line-height:1;
+       color:#a9791f;font-weight:600;letter-spacing:-.02em}
+  .head h3{font-size:18px;line-height:1.45;margin:0;font-weight:640;flex:1}
+  .type{font-size:11.5px;color:#6d6a64;border:1px solid #e7e0d3;background:#fff;
+        border-radius:4px;padding:1px 7px;white-space:nowrap}
+  .hot-line{font-size:13px;color:#6d6a64;margin:0 0 14px;padding-left:36px}
+
+  /* 口播区 */
+  .vo{background:#fff;border:1px solid #ece5d8;border-radius:8px;padding:14px 16px 10px}
+  .vo-bar{display:flex;align-items:center;justify-content:space-between;
+          gap:10px;margin:0 0 8px}
+  .vo-bar span{font-size:12.5px;color:#8a8478;font-family:ui-monospace,Consolas,monospace}
+  .copy{font:inherit;font-size:12.5px;color:#8a5f12;background:#fdf6e6;
+        border:1px solid #e3cf9e;border-radius:5px;padding:3px 10px;cursor:pointer}
+  .copy:active{transform:translateY(1px)}
+  .vo p{font-size:17px;line-height:1.95;margin:0 0 12px;letter-spacing:.01em}
+  .vo p:last-child{margin-bottom:4px}
+
+  /* 镜头与元信息 */
+  .shots{list-style:none;margin:14px 0 0;padding:0;counter-reset:s}
+  .shots li{counter-increment:s;position:relative;padding-left:24px;
+            font-size:14.5px;color:#3d3a34;margin-bottom:5px}
+  .shots li::before{content:"镜" counter(s);position:absolute;left:0;top:1px;
+    font-size:11.5px;color:#a9791f;font-family:ui-monospace,Consolas,monospace}
+  .foot{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 0;padding-top:12px;
+        border-top:1px solid #ece5d8;font-size:12.5px;color:#8a8478}
+  .cta{font-size:14px;margin:10px 0 0;color:#3d3a34}
+  .cta b{color:#8a5f12;font-weight:600}
+
+  /* 页脚 */
+  .end{margin:40px 0 0;padding-top:16px;border-top:1px solid #e7e0d3;
+       font-size:12.5px;color:#8a8478;line-height:1.75}
+  .bar{position:fixed;right:18px;bottom:18px;display:flex;gap:8px}
+  .bar button{font:inherit;font-size:13px;padding:9px 14px;border-radius:8px;
+    border:1px solid #d9cfb8;background:#fff;color:#3d3a34;cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.06)}
+
+  /* 手机 */
+  @media (max-width:640px){
+    body{padding:22px 14px 84px;font-size:15px}
+    h1{font-size:22px}
+    .card{padding:16px 14px 14px}
+    .head h3{font-size:17px}
+    .vo p{font-size:16.5px;line-height:1.9}
+    .hot-line{padding-left:0;margin-bottom:12px}
+  }
+
+  /* 打印 */
+  @page{size:A4;margin:12mm 11mm}
+  @media print{
+    body{padding:0;font-size:10pt;line-height:1.7}
+    .wrap{max-width:none}
+    .bar,.copy{display:none}
+    .kicker{font-size:8pt;margin-bottom:2mm}
+    h1{font-size:17pt;margin-bottom:3mm}
+    .meta{margin-bottom:3mm}
+    .lede{font-size:9pt;margin-bottom:5mm}
+    h2{font-size:9.5pt;margin:5mm 0 2.5mm;break-after:avoid}
+    .hots li{padding:1.5mm 0 1.5mm 6mm;font-size:10pt}
+    .card{break-inside:avoid;page-break-inside:avoid;background:#fff;
+          border-color:#d8d2c4;margin-bottom:5mm;padding:5mm 5mm 4mm}
+    .num{font-size:16pt}
+    .head h3{font-size:13pt}
+    .hot-line{font-size:9pt;margin-bottom:2.5mm}
+    .vo{padding:3mm 4mm 2mm}
+    .vo-bar{margin-bottom:1.5mm}
+    .vo p{font-size:10.5pt;line-height:1.7;margin-bottom:2.5mm}
+    .shots{margin-top:2.5mm}
+    .shots li{font-size:9.5pt;margin-bottom:1mm}
+    .foot{margin-top:2.5mm;padding-top:2mm;font-size:8.5pt}
+    .cta{font-size:9.5pt;margin-top:2mm}
+    .end{margin-top:6mm;padding-top:3mm;font-size:8.5pt}
+    a{color:inherit;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="kicker">小狄氧舱 · 自媒体脚本</p>
+  <h1>杭州 · 双人舱 · 本周 10 条</h1>
+  <div class="meta">
+    <span class="pill">GYCHA-M001</span>
+    <span class="pill">2026-11-25</span>
+    <span class="pill hot">热点：实时检索（示例）</span>
+  </div>
+  <p class="lede">热点为示例数据，4 条可挂桥；其余 6 条为常青选题。口播按 4.7 字/秒实算，三条一次能拍完。</p>
+
+  <h2>本周能用的热点</h2>
+  <ol class="hots">
+    <li data-i="01">体重管理年相关讨论仍在延续<span class="src">全国 · 示例数据 · 可挂第 01 条</span></li>
+    <li data-i="02">健身房闭店、私教转型的讨论<span class="src">全国 · 示例数据 · 可挂第 02 条</span></li>
+    <li data-i="03">杭州周末一场路跑赛事<span class="src">本地 · 示例数据 · 可挂第 03 条</span></li>
+    <li data-i="04">降温 ＋ 流感季提前<span class="src">本地 · 示例数据 · 可挂第 04 条</span></li>
+  </ol>
+
+  <h2>十条脚本</h2>
+
+  <article class="card">
+    <div class="head">
+      <span class="num">01</span>
+      <h3>双人场次，时间没变，钱变了</h3>
+      <span class="type">体验</span>
+    </div>
+    <p class="hot-line">挂点：全国&quot;体重管理&quot;讨论 → 双人成行是关系型消费，不是情侣专属</p>
+
+    <div class="vo">
+      <div class="vo-bar"><span>24 秒 · 115 字 · 3 段</span>
+        <button class="copy" type="button">复制口播</button></div>
+      <p>一台机器，接待一个人还是两个人，用的时间是同一段。六十分钟，一分不多。这条账很少有人算。</p>
+      <p>时间一样，人不一样，收的钱也不一样。一个人不好意思来，两个人就来了——夫妻、母女、闺蜜，都是这个道理。</p>
+      <p>所以你不是多卖一个位置，是换了一批客人。排期表上写&quot;双人&quot;，来的其实是两个人的关系。</p>
+    </div>
+
+    <ul class="shots">
+      <li>你站在双人舱门口说第一句（近景）</li>
+      <li>舱内并排两个位置（广角）</li>
+      <li>两个人换鞋进舱的背影（中景）</li>
+    </ul>
+
+    <div class="foot"><span>拍摄 15 分钟</span><span>难度 ★</span><span>口播 24 秒</span></div>
+    <p class="cta"><b>CTA</b>　你店里周末两个人一起来的，占几成？打在评论区。</p>
+  </article>
+  <article class="card">
+    <div class="head">
+      <span class="num">02</span>
+      <h3>我劝你先别急着买舱（反常识）</h3>
+      <span class="type">避坑</span>
+    </div>
+    <p class="hot-line">挂点：全国&quot;健身房闭店&quot;讨论 → 设备不是救命稻草，客源结构才是</p>
+
+    <div class="vo">
+      <div class="vo-bar"><span>22 秒 · 101 字 · 3 段</span>
+        <button class="copy" type="button">复制口播</button></div>
+      <p>有人加我第一句就问多少钱。我一般先劝一句：别急。</p>
+      <p>不是不想卖。是没有客源结构，这台机器买回去就是负债。房租照付，折旧照走，它一天躺着，你天天能看见。</p>
+      <p>先把&quot;谁会来、多久来一次&quot;想清楚，再谈型号和价格。顺序反了，钱就白花。这话我说了三年，没改过。</p>
+    </div>
+
+    <ul class="shots">
+      <li>你说&quot;别急&quot;那句（近景）</li>
+      <li>空舱停在那（全景，光线冷一点）</li>
+      <li>预约本翻页（特写）</li>
+    </ul>
+
+    <div class="foot"><span>拍摄 12 分钟</span><span>难度 ★</span><span>口播 22 秒</span></div>
+    <p class="cta"><b>CTA</b>　你现在手上有什么场地、大概什么客群？说清楚我帮你算。</p>
+  </article>
+  <article class="card">
+    <div class="head">
+      <span class="num">03</span>
+      <h3>断电那一刻，才知道这台舱值多少钱</h3>
+      <span class="type">避坑</span>
+    </div>
+    <p class="hot-line">挂点：无热点，常青避坑（信任类内容不依赖热点）</p>
+
+    <div class="vo">
+      <div class="vo-bar"><span>18 秒 · 84 字 · 3 段</span>
+        <button class="copy" type="button">复制口播</button></div>
+      <p>宣传页上看不出来的东西，断电那一秒全露出来。</p>
+      <p>舱里能不能自己泄压？会不会报警？停电了怎么办？三样缺一样，就不叫安全设计，叫运气。</p>
+      <p>所以去的时候别听原理。让他当场断电。就一次。压力表怎么走，你全明白。</p>
+    </div>
+
+    <ul class="shots">
+      <li>你手里拿着总开关（近景）</li>
+      <li>断电瞬间舱体与压力表（同框）</li>
+      <li>压力表指针回落（特写）</li>
+    </ul>
+
+    <div class="foot"><span>拍摄 20 分钟</span><span>难度 ★★</span><span>口播 18 秒</span></div>
+    <p class="cta"><b>CTA</b>　你去看样机的时候，敢不敢让厂家当场断电？评论区说。</p>
+  </article>
+  <article class="card">
+    <div class="head">
+      <span class="num">04</span>
+      <h3>检测报告只看三行（反常识）</h3>
+      <span class="type">避坑</span>
+    </div>
+    <p class="hot-line">挂点：全国&quot;抗衰是不是智商税&quot;争议 → 能拿出报告的，比会讲原理的可信</p>
+
+    <div class="vo">
+      <div class="vo-bar"><span>21 秒 · 100 字 · 3 段</span>
+        <button class="copy" type="button">复制口播</button></div>
+      <p>报告那么厚，其实只用看三行。</p>
+      <p>第一行看执行的是什么标准，第二行看电气安全是不是全项，第三行看是谁出的这份报告。剩下几十页，是给检测机构看的。</p>
+      <p>标准只是及格线，不是卖点。及格之后往上抬多少，才是产品之间的差距。这三行，一分钟能看完。</p>
+    </div>
+
+    <ul class="shots">
+      <li>报告翻到首页（俯拍）</li>
+      <li>手指停在三处关键行（特写）</li>
+      <li>你抬头说最后一句（近景）</li>
+    </ul>
+
+    <div class="foot"><span>拍摄 15 分钟</span><span>难度 ★</span><span>口播 21 秒</span></div>
+    <p class="cta"><b>CTA</b>　想看这三行长什么样，评论区打个&quot;报告&quot;。</p>
+  </article>
+  <article class="card">
+    <div class="head">
+      <span class="num">05</span>
+      <h3>两个人一起躺，可以一句话不说</h3>
+      <span class="type">体验</span>
+    </div>
+    <p class="hot-line">挂点：本地降温 → 天冷不想动，室内两小时怎么安排</p>
+
+    <div class="vo">
+      <div class="vo-bar"><span>18 秒 · 87 字 · 3 段</span>
+        <button class="copy" type="button">复制口播</button></div>
+      <p>两个人进去，不用聊天，也不用一起做点什么。</p>
+      <p>门一关，外面的事就断了。手机在柜子里，前台在外面，各躺各的，六十分钟，中间没人叫你。</p>
+      <p>出来的时候人会慢半拍，说话声音都低一点。就这样。有些状态，一个人来是碰不到的。</p>
+    </div>
+
+    <ul class="shots">
+      <li>两人并肩走进去（中景）</li>
+      <li>舱门关闭的声音（特写＋同期声）</li>
+      <li>舱内视角，两人各躺一边（广角）</li>
+    </ul>
+
+    <div class="foot"><span>拍摄 20 分钟</span><span>难度 ★★</span><span>口播 18 秒</span></div>
+    <p class="cta"><b>CTA</b>　你想跟谁一起躺这一小时？</p>
+  </article>
+  <article class="card">
+    <div class="head">
+      <span class="num">06</span>
+      <h3>进门先换鞋，手机放柜里</h3>
+      <span class="type">体验</span>
+    </div>
+    <p class="hot-line">挂点：无热点，常青现场细节（细节比形容词可信）</p>
+
+    <div class="vo">
+      <div class="vo-bar"><span>20 秒 · 93 字 · 3 段</span>
+        <button class="copy" type="button">复制口播</button></div>
+      <p>我们这儿进门第一件事不是躺。是换鞋，然后把手机放进柜子。</p>
+      <p>不是我规矩多。这一小时你要是还捏着手机，那跟在家沙发上躺着没区别，甚至更累。</p>
+      <p>很多人第一次不习惯，嘴上说不用。第二次来，自己就把手机递过来了。这个不用我劝。</p>
+    </div>
+
+    <ul class="shots">
+      <li>换鞋凳与拖鞋（俯拍）</li>
+      <li>手机放进储物柜、关门（特写）</li>
+      <li>走廊尽头的舱门（中景）</li>
+    </ul>
+
+    <div class="foot"><span>拍摄 12 分钟</span><span>难度 ★</span><span>口播 20 秒</span></div>
+    <p class="cta"><b>CTA</b>　你上一次一小时没看手机，是什么时候？</p>
+  </article>
+  <article class="card">
+    <div class="head">
+      <span class="num">07</span>
+      <h3>周末两个小时，能怎么安排</h3>
+      <span class="type">体验</span>
+    </div>
+    <p class="hot-line">挂点：本地路跑赛事 → 运动人群的恢复需求，同城可挂</p>
+
+    <div class="vo">
+      <div class="vo-bar"><span>18 秒 · 87 字 · 3 段</span>
+        <button class="copy" type="button">复制口播</button></div>
+      <p>周末来一趟，其实不止那六十分钟。</p>
+      <p>前后各留半小时，喝茶、换衣服、坐一会儿。两个小时过去了。这两小时，才是你真正卖的东西。</p>
+      <p>只卖&quot;躺一次&quot;的店，客人一个月来一次。会卖&quot;半天&quot;的店，客人一周来一次。差在这儿。一次。和半天。</p>
+    </div>
+
+    <ul class="shots">
+      <li>茶台与休息区（中景）</li>
+      <li>客人坐着聊天（背影）</li>
+      <li>排期表上两个小时一段（特写）</li>
+    </ul>
+
+    <div class="foot"><span>拍摄 20 分钟</span><span>难度 ★★</span><span>口播 18 秒</span></div>
+    <p class="cta"><b>CTA</b>　你店里客人平均待多久？报个数字。</p>
+  </article>
+  <article class="card">
+    <div class="head">
+      <span class="num">08</span>
+      <h3>售后不是口号，是排期</h3>
+      <span class="type">信任</span>
+    </div>
+    <p class="hot-line">挂点：无热点，常青信任类</p>
+
+    <div class="vo">
+      <div class="vo-bar"><span>18 秒 · 85 字 · 3 段</span>
+        <button class="copy" type="button">复制口播</button></div>
+      <p>售后这两个字谁都会说。你只要问一句：什么时候来。</p>
+      <p>主动监控、易损件上门换、定期培训、电话随时能打通。这四件事都得有时间表，才叫服务。</p>
+      <p>没有时间表的承诺，第一年靠热情，第二年靠运气，第三年就找不着人了。</p>
+    </div>
+
+    <ul class="shots">
+      <li>你手里翻服务记录（近景）</li>
+      <li>工程师上门换件（中景）</li>
+      <li>电话响、接起（特写）</li>
+    </ul>
+
+    <div class="foot"><span>拍摄 25 分钟</span><span>难度 ★★</span><span>口播 18 秒</span></div>
+    <p class="cta"><b>CTA</b>　你买过的东西里，售后最让你放心的是哪个牌子？</p>
+  </article>
+  <article class="card">
+    <div class="head">
+      <span class="num">09</span>
+      <h3>上市公司的检测能力，差在哪</h3>
+      <span class="type">信任</span>
+    </div>
+    <p class="hot-line">挂点：全国&quot;健身房闭店&quot;讨论 → 选供应商先看它十年后还在不在</p>
+
+    <div class="vo">
+      <div class="vo-bar"><span>19 秒 · 89 字 · 3 段</span>
+        <button class="copy" type="button">复制口播</button></div>
+      <p>同样是做舱，一家二十人的厂和一家上市公司，差的不在参数表上。</p>
+      <p>差在它有自己的实验室，先自己测一遍，再送第三方测一遍。差在出问题时有工程师，不是只有一个销售。</p>
+      <p>参数可以照着抄。实验室抄不走，工程师也抄不走。</p>
+    </div>
+
+    <ul class="shots">
+      <li>实验室设备全景（如无，用报告与证书替代）</li>
+      <li>检测流程手部特写</li>
+      <li>你出镜说最后一句</li>
+    </ul>
+
+    <div class="foot"><span>拍摄 20 分钟</span><span>难度 ★★</span><span>口播 19 秒</span></div>
+    <p class="cta"><b>CTA</b>　你选供应商的时候，最担心它哪一天出问题？</p>
+  </article>
+  <article class="card">
+    <div class="head">
+      <span class="num">10</span>
+      <h3>流感季被问最多的一句：能不能防感冒（反常识）</h3>
+      <span class="type">热点</span>
+    </div>
+    <p class="hot-line">挂点：本地降温＋流感季提前 → 客人主动来问，正是划清界限的机会</p>
+
+    <div class="vo">
+      <div class="vo-bar"><span>20 秒 · 93 字 · 3 段</span>
+        <button class="copy" type="button">复制口播</button></div>
+      <p>这两天降温，问得最多的一句是：这个能不能防感冒。</p>
+      <p>不能。它不是药，不治病，也不替代医疗。这句话我必须先说清楚，不然后面说的你都会怀疑。</p>
+      <p>它能做的是另一件事：让你有一小时睡过去、松下来。累的人少一点。别的我不好替你保证。</p>
+    </div>
+
+    <ul class="shots">
+      <li>你出镜直接说&quot;不能&quot;（近景，不要笑）</li>
+      <li>舱内客人闭眼（中景）</li>
+      <li>门口温度计/外套（细节）</li>
+    </ul>
+
+    <div class="foot"><span>拍摄 15 分钟</span><span>难度 ★</span><span>口播 20 秒</span></div>
+    <p class="cta"><b>CTA</b>　流感季你最想解决的是哪一件？说具体点。</p>
+  </article>
+
+  <div class="end">
+    <p><b>拍摄顺序</b>　先拍 01／02／03，都在舱边同一位置，一次录完约 45 分钟；其余换个光线再拍。</p>
+    <p><b>合规</b>　本批稿件不含功效宣称，不替代医疗建议。经营数字为示例测算，实际以本地客流为准。</p>
+    <p>要哪条出完整分镜版，回一句「展开第 N 条」。</p>
+  </div>
+
+</div>
+
+<div class="bar"><button type="button" onclick="window.print()">打印 / 存 PDF</button></div>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var box = btn.closest('.vo');
+    var text = Array.prototype.map.call(box.querySelectorAll('p'), function (p) {
+      return p.textContent.trim();
+    }).filter(Boolean).join('\n\n');
+    var done = function () {
+      var old = btn.textContent;
+      btn.textContent = '已复制';
+      setTimeout(function () { btn.textContent = old; }, 1400);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  });
+});
+</script>
+</body>
+</html>
